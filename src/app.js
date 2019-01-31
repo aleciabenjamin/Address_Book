@@ -14,20 +14,22 @@ const renderContacts = () => {
       let li = document.createElement('li')
       li.setAttribute("class","list-reset");
       li.innerHTML = `
-        <div class="card">
-
-          <div class"max-w-md w-full lg:flex"> 
+      <div class="card">
+      <div class="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+      <div class="sm:flex sm:items-center px-6 py-4">
+        <div class="text-center sm:text-left sm:flex-grow">
           <div class="content">
-            <h1>${ contact.name }</h1>
-            <h2>${ contact.company }</h2>
-            <p>${ contact.notes }</p> 
-            ${ contact.email } | 
+            <h3 class="" >${ contact.name }</h3>
+            <h4 class="">${ contact.company }</h4>
+            <P class="">${ contact.phone }</P>
+            <p class="">${ contact.notes }</p> 
+            <p class="">${ contact.email }</p> | 
             <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
-
-          </div>
           </div>
         </div>
-        </div><br>
+      </div>
+    </div>
+    </div><br>
      `
      
       ul.appendChild(li)
@@ -78,15 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
 })
 
-document.removeEventListener('DOMContentLoaded', (elementId) => { 
-  const removeContactForm = document.querySelector('.new-contact-form') 
-  removeContactForm.removeEventListener('.delete-button', event => {
-    event.preventDefault()
-    let element = document.getElementById(elementId)
-      element.parentNode.removeChild(element)
+let delete_button = document.querySelector('.contact-list')
 
-      storage.getItem('contacts', JSON.stringify(contacts))
-      removeContactForm.reset()
+    
+
+     delete_button.getElementById(delete_contact).addEventListener('click',event => {
+      let id = event.target.parentNode.id
+      console.log(contacts)
+      let contacts = JSON.parse(storage.getItem('contacts')) || []
       
- })
-}) 
+      contacts.forEach(contact => {
+        
+        contact.id == id ? contacts.splice(contacts.indexOf(contact),1)  : false
+      
+      })
+})
