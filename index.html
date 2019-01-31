@@ -5,28 +5,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link  href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"  rel="stylesheet">
   <title>Address book</title>
+  <style>
+   #form-input {
+     margin: 0 550px;
+   }
+   #save-button{
+    padding: 13px;
+   }
+   .save-botton-dev{
+     padding-bottom: 40px;
+   }
+  </style>
 </head>
 
 <body>
-  <form class="new-contact-form" action="#">
+  <h1 class="font-serif text-lg text-grey-darkest text-center text-5xl bg-blue-lighter leading-loose bg-auto">Address book</h1>
+  <h1 class = "leading-loose" id = "form-input" >Contacts</h1>
+  <form class="new-contact-form" action="#" id = "form-input">
     <label for="name">Name</label>
-    <input id="contact-name" name="name" type="text">
+    <input class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4" id="contact-name" name="name" type="text">
     <label for="email">Email</label>
-    <input id="contact-email" name="email" type="email">
+    <input class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4 " id="contact-email" name="email" type="email">
     <label for="phone">Phone</label>
-    <input id="contact-phone" name="phone" type="text">
+    <input class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4" id="contact-phone" name="phone" type="tel">
     <label for="company">Company</label>
-    <input id="contact-company" name="company" type="text">
-    <label for="notes">Notes</label>
-    <textarea id="contact-notes" name="notes" type="text"></textarea>
+    <input class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4" id="contact-company" name="company" type="text">
     <label for="twitter">Twitter</label>
-    <input id="contact-twitter" name="twitter" type="text">
-    <input class="save-contact" type="submit" value="Save contact">
+    <input class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4" id="contact-twitter" name="twitter" type="text">
+    <label for="notes">Notes</label>
+    <textarea class="shadow appearance-none border rounded w-full p-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline mb-4" id="contact-notes" name="notes" type="text"></textarea>
+    <div class = "save-botton-dev">
+      <input class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" id="save-button" type="submit" value="Save contact">
+    </div>
   </form>
   <script src="./dist/bundle.js"></script>
-  <h1>Contacts</h1>
-  <button class="add-contact">Add Contact</button>
   <div class="contact-list">
   </div>
 </body>

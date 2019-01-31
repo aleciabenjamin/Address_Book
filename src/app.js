@@ -12,43 +12,44 @@ const renderContacts = () => {
     
     contacts.forEach(contact => {
       let li = document.createElement('li')
+      li.setAttribute("class","list-reset");
       li.innerHTML = `
         <div class="card">
-          <div class="image">
-            <img src="https://ca-address-book.herokuapp.com/images/pine.jpg" />
-          </div>
-          <div class="content">
-            <h1>${ contact.name }</h1>
-            <h2>${ contact.company }</h2>
-            <p>${ contact.notes }</p> 
-            ${ contact.email } | 
-            <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
+          <div class="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+          <div class="sm:flex sm:items-center px-6 py-4">
+            <div class="text-center sm:text-left sm:flex-grow">
+              <div class="content">
+                <h3 class="" >${ contact.name }</h3>
+                <h4 class="">${ contact.company }</h4>
+                <P class="">${ contact.phone }</P>
+                <p class="">${ contact.notes }</p> 
+                <p class="">${ contact.email }</p> | 
+                <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
+              </div>
+            </div>
           </div>
         </div>
+        </div><br>
      `
-      
+     
       ul.appendChild(li)
+
     })
 
-    
     div.appendChild(ul) 
-  } else { 
-      div.innerHTML = '<p>You have no contacts in your address book</p>' 
+     
+   } else { 
+      div.innerHTML = '<p class= "text-center">You have no contacts in your address book</p>' 
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContacts() 
-  const addContactForm = document.querySelector('.new-contact-form')
-  
-    
+  const addContactForm = document.querySelector('.new-contact-form') 
     addContactForm.addEventListener('submit', event => {
       event.preventDefault()
       const storage = window.localStorage
       
-       
-  
-     
       const {
         name,
         email,
@@ -78,3 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       
 })
+
+document.removeEventListener('DOMContentLoaded', (elementId) => { 
+  const removeContactForm = document.querySelector('.new-contact-form') 
+  removeContactForm.removeEventListener('.delete-button', event => {
+    event.preventDefault()
+    let element = document.getElementById(elementId)
+      element.parentNode.removeChild(element)
+
+      storage.getItem('contacts', JSON.stringify(contacts))
+      removeContactForm.reset()
+      
+ })
+}) 
