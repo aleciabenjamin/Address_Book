@@ -15,18 +15,16 @@ const renderContacts = () => {
       li.setAttribute("class","list-reset");
       li.innerHTML = `
         <div class="card">
-          <div class="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-          <div class="sm:flex sm:items-center px-6 py-4">
-            <div class="text-center sm:text-left sm:flex-grow">
-              <div class="content">
-                <h3 class="" >${ contact.name }</h3>
-                <h4 class="">${ contact.company }</h4>
-                <P class="">${ contact.phone }</P>
-                <p class="">${ contact.notes }</p> 
-                <p class="">${ contact.email }</p> | 
-                <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
-              </div>
-            </div>
+
+          <div class"max-w-md w-full lg:flex"> 
+          <div class="content">
+            <h1>${ contact.name }</h1>
+            <h2>${ contact.company }</h2>
+            <p>${ contact.notes }</p> 
+            ${ contact.email } | 
+            <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
+
+          </div>
           </div>
         </div>
         </div><br>
