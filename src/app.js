@@ -12,8 +12,10 @@ const renderContacts = () => {
     
     contacts.forEach(contact => {
       let li = document.createElement('li')
+      li.setAttribute("class","list-reset");
       li.innerHTML = `
         <div class="card">
+
           <div class"max-w-md w-full lg:flex"> 
           <div class="content">
             <h1>${ contact.name }</h1>
@@ -21,33 +23,31 @@ const renderContacts = () => {
             <p>${ contact.notes }</p> 
             ${ contact.email } | 
             <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
+
           </div>
           </div>
         </div>
+        </div><br>
      `
-      
+     
       ul.appendChild(li)
+
     })
 
-    
     div.appendChild(ul) 
-  } else { 
-      div.innerHTML = '<p>You have no contacts in your address book</p>' 
+     
+   } else { 
+      div.innerHTML = '<p class= "text-center">You have no contacts in your address book</p>' 
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContacts() 
-  const addContactForm = document.querySelector('.new-contact-form')
-  
-    
+  const addContactForm = document.querySelector('.new-contact-form') 
     addContactForm.addEventListener('submit', event => {
       event.preventDefault()
       const storage = window.localStorage
       
-       
-  
-     
       const {
         name,
         email,
@@ -77,3 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       
 })
+
+document.removeEventListener('DOMContentLoaded', (elementId) => { 
+  const removeContactForm = document.querySelector('.new-contact-form') 
+  removeContactForm.removeEventListener('.delete-button', event => {
+    event.preventDefault()
+    let element = document.getElementById(elementId)
+      element.parentNode.removeChild(element)
+
+      storage.getItem('contacts', JSON.stringify(contacts))
+      removeContactForm.reset()
+      
+ })
+}) 
