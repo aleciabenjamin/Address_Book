@@ -7,34 +7,25 @@ const renderContacts = () => {
 
   if (contacts) {
     div.innerHTML = '' 
-    const ul = document.createElement('ul')
+    let ul = document.createElement('ul');
+    ul.class = "flex";
 
     
     contacts.forEach(contact => {
-      let li = document.createElement('li')
-      li.id = contact.id
-      li.setAttribute("class","list-reset");
+      let li = document.createElement('li');
+      li.id = contact.id;
+      li.classList += "list-reset";
       li.innerHTML = `
-      <div class="card">
-        <div class="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-          <div class="sm:flex sm:items-center px-6 py-4">
-            <div class="text-center sm:text-left sm:flex-grow">
-              <div class="content">
+            
+          <div class="content text-center sm:text-left sm:flex-growbg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden sm:flex sm:items-center px-6 py-4">
                 <h3 class="" >${ contact.name }</h3>
                 <h4 class="">${ contact.company }</h4>
                 <P class="">${ contact.phone }</P>
                 <p class="">${ contact.notes }</p> 
                 <p class="">${ contact.email }</p> | 
                 <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
-                
-                
-              </div>
-            </div>
           </div>
-      </div>
-    </div>
-     
-   
+        
     `
     let button = document.createElement('button');
       button.classList += "delete-contact";
