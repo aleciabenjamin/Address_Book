@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contacts.forEach(contact => {
       
       contact.id == id ? contacts.splice(contacts.indexOf(contact),1)  : false
+      
     
     })
     
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     storage.setItem('contacts', JSON.stringify(contacts))
     renderContacts()
+    
     
     
   }) 
