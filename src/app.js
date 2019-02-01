@@ -33,6 +33,33 @@ const renderContacts = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderContacts()
+
+
+  let delete_button = document.querySelector('.contact-list')
+  const storage = window.localStorage
+
+  
+
+   delete_button.addEventListener('click',event => {
+    let id = event.target.parentNode.id
+    let contacts = JSON.parse(storage.getItem('contacts')) || []
+    console.log(contacts)
+    contacts.forEach(contact => {
+      
+      contact.id == id ? contacts.splice(contacts.indexOf(contact),1)  : false
+      
+    
+    })
+    
+    console.log(contacts)
+    
+    storage.setItem('contacts', JSON.stringify(contacts))
+    renderContacts()
+    
+    
+    
+  }) 
+  
   const addContactForm = document.querySelector('.new-contact-form')
   addContactForm.addEventListener('submit', event => {
     const storage = window.localStorage
