@@ -26,7 +26,7 @@ const renderContacts = () => {
           </div>
         
     `
-   
+   li.appendChild(ul)
     })
     div.appendChild(ul) 
      
