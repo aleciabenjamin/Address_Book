@@ -2,13 +2,11 @@ const renderContacts = () => {
   const storage = window.localStorage
   const contacts = JSON.parse(storage.getItem('contacts'))
 
-
   let div = document.querySelector('.contact-list')
 
   if (contacts) {
     div.innerHTML = '' 
     const ul = document.createElement('ul')
-
     
     contacts.forEach(contact => {
       let li = document.createElement('li')
@@ -25,27 +23,19 @@ const renderContacts = () => {
                 <P class="">${ contact.phone }</P>
                 <p class="">${ contact.notes }</p> 
                 <p class="">${ contact.email }</p> | 
-                <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a>
-                
-                
+                <a href="https://www.twitter.com/${ contact.twitter}">@${contact.twitter}</a> 
+                <button class="delete-button">delete</button>
               </div>
             </div>
           </div>
       </div>
-    </div>
-     
-   
-    `
-    let button = document.createElement('button');
-      button.classList += "delete-contact";
-      button.innerHTML ='Delete';
-      li.appendChild(button) 
-      
-      ul.appendChild(li)
-     
-      
-    })
+    </div>`
 
+    let button = document.createElement('button');
+    button.innerHTML =document.querySelector('.delete-button');
+    li.appendChild(button)
+    ul.appendChild(li)     
+    })
     div.appendChild(ul) 
      
    } else { 
@@ -53,46 +43,12 @@ const renderContacts = () => {
   }
 }
 
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
   renderContacts()
-
-
-  let delete_button = document.querySelector('.contact-list')
-  const storage = window.localStorage
-
-  
-
-   delete_button.addEventListener('click',event => {
-    let id = event.target.parentNode.id
-    let contacts = JSON.parse(storage.getItem('contacts')) || []
-    console.log(contacts)
-    contacts.forEach(contact => {
-      
-      contact.id == id ? contacts.splice(contacts.indexOf(contact),1)  : false
-    
-    })
-    
-    console.log(contacts)
-    
-    storage.setItem('contacts', JSON.stringify(contacts))
-    renderContacts()
-    
-    
-  }) 
-  
   const addContactForm = document.querySelector('.new-contact-form')
-
-  
   addContactForm.addEventListener('submit', event => {
-    
+    const storage = window.localStorage
     event.preventDefault()
-
-    
     const {
       name,
       email,
@@ -102,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
       twitter,
     } = addContactForm.elements
 
-    
     const contact = {
       id: Date.now(),
       name: name.value,
@@ -113,17 +68,23 @@ document.addEventListener('DOMContentLoaded', () => {
       twitter: twitter.value,
     }
 
-  
-  let contacts = JSON.parse(storage.getItem('contacts')) || []
-
-  contacts.push(contact)
-
-  storage.setItem('contacts', JSON.stringify(contacts))
-  
-  renderContacts()
-
-  addContactForm.reset()
-
+    let contacts = JSON.parse(storage.getItem('contacts')) || []
+    contacts.push(contact)
+    storage.setItem('contacts', JSON.stringify(contacts)) 
+    renderContacts()
+    addContactForm.reset()
   })
- 
+
+  const deleteButton = document.querySelector('.contact-list') 
+     deleteButton.addEventListener('click', event => {
+      const storage = window.localStorage
+      contacts.forEach(contact => {
+        let id = event.target.parentNode.id
+        contact.id = id ? contacts.splice(contacts.indexOf(contact),1)  : false 
+      })
+      let contacts = JSON.parse(storage.getItem('contacts')) 
+      console.log(contacts)
+      storage.removeItem('contacts', JSON.stringify(contacts))
+      renderContacts()
+     })
 })
