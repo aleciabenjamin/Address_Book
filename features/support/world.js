@@ -38,8 +38,8 @@ class AddressBookWorld {
 
         btnSelectorFromName(btnName) {
             switch (btnName) {
-              case 'add contact':
-                return '.add-contact'
+              case 'delete':
+                return '.delete-contact'
                 break
               case 'save contact':
                 return '.save-contact'
